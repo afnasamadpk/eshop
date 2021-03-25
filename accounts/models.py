@@ -39,6 +39,7 @@ class UserManager(BaseUserManager):
 
 class UserAccounts(AbstractUser):
     username = None
+    shortname=models.CharField(max_length=12, null=False)
     email = models.EmailField(_('email address'), unique=True)
     phone = models.CharField(max_length=12, null=False)
     GENDER_CHOICES = (

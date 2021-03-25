@@ -69,7 +69,7 @@
                             <i class="fa fa-star-o"></i>
                             <i class="fa fa-star-o"></i>
                         </div>
-                        <span><a href="#">3 Reviews</a></span>
+                        <span><a href="#">{{ reviews.all|length }} Reviews</a></span>
                     </div>
                     <p>{{ p.description }}</p>
                     <div class="pro-details-list">
@@ -157,7 +157,7 @@
             <div class="description-review-topbar nav">
                 <a data-toggle="tab" href="#des-details1">Additional information</a>
                 <a class="active" data-toggle="tab" href="#des-details2">Description</a>
-                <a data-toggle="tab" href="#des-details3">Reviews (2)</a>
+                <a data-toggle="tab" href="#des-details3">Reviews ({{reviews.all|length }})</a>
             </div>
             <div class="tab-content description-White Lewis">
                 <div id="des-details2" class="tab-pane active">
@@ -194,7 +194,7 @@
                                         <div class="review-top-wrap">
                                             <div class="review-left">
                                                 <div class="review-name">
-                                                    <h4>{{ r.first_name|title }} {{ r.last_name|title }}</h4>
+                                                    <h4>{{ request.user }}</h4>
                                                 </div>
                                                 <div class="review-rating">
                                                     <i class="fa fa-star"></i>
@@ -272,16 +272,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input name="first_name" placeholder="first name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="rating-form-style mb-10">
-                                                    <input name="last_name" placeholder="last name" type="text">
-                                                </div>
-                                            </div>
+
                                             
                                             <div class="col-md-12">
                                                 <div class="rating-form-style mb-10">

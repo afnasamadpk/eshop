@@ -25,18 +25,18 @@ class Products(models.Model):
         return self.name
 
 
+
+
 class Review(models.Model):
     user = models.ForeignKey(UserAccounts,on_delete=models.CASCADE,related_name='review')
     products = models.ForeignKey(Products,on_delete=models.CASCADE)
-    first_name = models.CharField(max_length = 60)
-    last_name = models.CharField(max_length = 60)
-
     subject = models.CharField(max_length = 80)
     added_date=models.DateTimeField(auto_now_add = True)
     update_date=models.DateTimeField(auto_now = True)
-    rate = models.IntegerField(default = 0)
     comment = models.TextField( max_length = 150)
 
     def __str__(self):
         return self.subject
 
+# class Rating(models.Model):
+#     rate = models.IntegerField(default = 0)
