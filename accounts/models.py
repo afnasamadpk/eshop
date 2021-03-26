@@ -38,6 +38,7 @@ class UserManager(BaseUserManager):
 
 
 class UserAccounts(AbstractUser):
+    id = models.BigAutoField(primary_key = True)
     username = None
     shortname=models.CharField(max_length=12, null=False)
     email = models.EmailField(_('email address'), unique=True)
@@ -54,9 +55,12 @@ class UserAccounts(AbstractUser):
     REQUIRED_FIELDS = []
     
     objects = UserManager()
+    def __str__(self):
+        return self.shortname
 
 
 class ProfilePicture(models.Model):
+    id = models.BigAutoField(primary_key = True)
     user = models.OneToOneField(UserAccounts, on_delete = models.CASCADE)
     image = models.ImageField(upload_to='profile', default='avatar.jpg')
 

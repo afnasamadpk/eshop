@@ -18,9 +18,9 @@ from django.urls import path
 from products.views import show_one_product,show_products
 
 urlpatterns = [
-    path('showoneproduct/<int:id>/',show_one_product,name='show_one_product'),
+    path('product/<int:id>/',show_one_product,name='show_one_product'),
     # path('review/<int:id>/',review,name = 'review'),
-    path('showproducts/<int:id>/',show_products,name='show_products'),
+    path('products/<int:id>/',show_products,name='show_products'),
     # path('showreviews/<int:id>/',show_reviews,name='show_reviews')
     
 ]

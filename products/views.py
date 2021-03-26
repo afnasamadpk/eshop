@@ -25,7 +25,7 @@ def show_one_product(request,id):
             obj.user = request.user
             obj.save()
             # return HttpResponse('added')
-            return redirect(f'/showoneproduct/{id}/')
+            return redirect(f'/product/{id}/')
         else:
             return render (request,'products/product-details-3.html',{'form':form})
 

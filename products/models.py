@@ -4,6 +4,7 @@ from accounts.models import UserAccounts
 # Create your models here.
 
 class Category(models.Model):
+    id = models.BigAutoField(primary_key = True)
     name = models.CharField(max_length=60)
     image = models.ImageField(upload_to='category')
 
@@ -12,6 +13,7 @@ class Category(models.Model):
 
 
 class Products(models.Model):
+    id = models.BigAutoField(primary_key = True)
     name = models.CharField(max_length = 60)
     price = models.PositiveIntegerField()
     description = models.TextField()
@@ -28,6 +30,7 @@ class Products(models.Model):
 
 
 class Review(models.Model):
+    id = models.BigAutoField(primary_key = True)
     user = models.ForeignKey(UserAccounts,on_delete=models.CASCADE,related_name='review')
     products = models.ForeignKey(Products,on_delete=models.CASCADE)
     subject = models.CharField(max_length = 80)

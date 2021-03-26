@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 
-from cart.models import Cart
+from cart.models import Cart,Wishlist
 from products.models import Products
 from accounts.models import UserAccounts
 from django.contrib.auth.decorators import login_required
@@ -35,6 +35,25 @@ def remove_from_cart(request,id):
 
     return redirect(next)
     
+
+def wish_list(request,id):
+    
+    next = request.GET.get('next', '/')
+    product = Products.objects.get(id = id)
+    user = request.user
+    
+    p = Wishlist(user=user,product=product)
+    p.save()
+    return redirect(next)
+def view_wishlist(request):
+    wish_list = []
+    if request.user.is_authenticated:
+         wish_list=Wishlist.objects.filter(user = request.user)
+    return render(request,'cart/wishlist.html',{'wish_list':wish_list})
+      
+   
+
+
 
 
 

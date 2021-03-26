@@ -113,7 +113,7 @@
                             <a href="{% url 'add_to_cart' p.id %}?next={{ request.path }}">Add to Cart</a>
                         </div>
                         <div class="pro-details-wishlist">
-                            <a href="#"><i class="fa fa-heart-o"></i></a>
+                            <a href="{% url 'wish_list' p.id %}?next={{ request.path }}"><i class="fa fa-heart-o"></i></a>
                         </div>
                         <div class="pro-details-compare">
                             <a href="#"><i class="pe-7s-shuffle"></i></a>
@@ -194,7 +194,7 @@
                                         <div class="review-top-wrap">
                                             <div class="review-left">
                                                 <div class="review-name">
-                                                    <h4>{{ request.user }}</h4>
+                                                    <h4>{{r.user}}</h4>
                                                 </div>
                                                 <div class="review-rating">
                                                     <i class="fa fa-star"></i>
