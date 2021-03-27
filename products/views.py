@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.views import View
 from django.views.generic import ListView,DetailView,TemplateView,CreateView
-from products.models import Products,Category
+from products.models import Products,Category,Rating
 from products.forms import ReviewModelForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
@@ -30,8 +30,15 @@ def show_one_product(request,id):
             return render (request,'products/product-details-3.html',{'form':form})
 
     else:
+        product = Products.objects.get(id = id)
+        rate = Rating.objects.filter(user=request.user,product=product).first()
+        five_stars = [1,2,3,4,5]
+        rating = 0
+        if rate:
+            rating = rate.rate
+
         form = ReviewModelForm()
-        return render (request,'products/product-details-3.html',{'form':form,'p':p,'reviews':reviews})
+        return render (request,'products/product-details-3.html',{'form':form,'p':p,'reviews':reviews, 'rating': rating, 'five_stars':five_stars})
 
 
 def show_products(request,id):
@@ -40,10 +47,21 @@ def show_products(request,id):
     return render(request,'products/shop.html',{'products':products})
 
 
-# def rating(request,id):
+def rating(request, product_id, rating):
     
-
-
+    next = request.GET.get('next', '/')
+    product = Products.objects.get(id = product_id)
+    user = request.user
+    rate = Rating.objects.filter(user=user,product=product).first()
+    if rate:
+        rate.rate = rating
+        rate.save()
+    else:
+        Rating.objects.create(user=user,product=product, rate=rating)
+        
+    count = Rating.objects.filter(product=product)
+    return redirect(next)
+    
 
 # def show_reviews(request,id):
 #     p = Products.objects.get(id = id)

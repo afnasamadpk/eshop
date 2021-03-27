@@ -41,5 +41,7 @@ class Review(models.Model):
     def __str__(self):
         return self.subject
 
-# class Rating(models.Model):
-#     rate = models.IntegerField(default = 0)
+class Rating(models.Model):
+    user = models.ForeignKey(UserAccounts,on_delete=models.CASCADE,related_name='rating')
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    rate = models.IntegerField(default = 1)

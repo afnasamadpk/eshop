@@ -63,11 +63,15 @@
                     </div>
                     <div class="pro-details-rating-wrap">
                         <div class="pro-details-rating">
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o yellow"></i>
-                            <i class="fa fa-star-o"></i>
-                            <i class="fa fa-star-o"></i>
+                            {% for star in five_stars %}
+                            <a href="{% url 'rating' p.id star %}?next={{ request.path }}">
+                                <i class="fa fa-star-o 
+                                {% if star <= rating %}
+                                    yellow
+                                {% endif %}
+                                "></i>
+                            </a>
+                            {% endfor %}
                         </div>
                         <span><a href="#">{{ reviews.all|length }} Reviews</a></span>
                     </div>
