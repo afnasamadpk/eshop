@@ -6,6 +6,7 @@ from products.forms import ReviewModelForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 
+
 # Create your views here.
 # def show_one_product(request,id):
 #     p = Products.objects.get(id=id)
@@ -37,8 +38,11 @@ def show_one_product(request,id):
         if rate:
             rating = rate.rate
 
+        
+
         form = ReviewModelForm()
-        return render (request,'products/product-details-3.html',{'form':form,'p':p,'reviews':reviews, 'rating': rating, 'five_stars':five_stars})
+        context = {'form':form,'p':p,'reviews':reviews, 'rating': rating, 'five_stars':five_stars}
+        return render (request,'products/product-details-3.html',context)
 
 
 def show_products(request,category_id):
@@ -59,9 +63,26 @@ def rating(request, product_id, rating):
     else:
         Rating.objects.create(user=user,product=product, rate=rating)
         
-    count = Rating.objects.filter(product=product)
-    return redirect(next)
     
+    # print(count)
+    return redirect(next)
+    # return redirect(next)
+    
+# def show_rating(request,id):
+#     count = Rating.objects.filter(product=product)
+#     star_count =str(len(count))
+#     sum=0
+#     for i in count:
+#         # print(i.rate)
+#         sum +=i.rate
+#     print(star_count)
+#     print(int(sum)/int(star_count))
+
+#     rated_value = int(sum)/int(star_count)
+#     return render(request,'product-details-3.html',{'rated_value':rated_value})
+
+
+
 
 # def show_reviews(request,id):
 #     p = Products.objects.get(id = id)

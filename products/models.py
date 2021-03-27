@@ -26,6 +26,16 @@ class Products(models.Model):
     def __str__(self):
         return self.name
 
+    def get_rating(self):
+        rating = Rating.objects.filter(product=self)
+        star_count = len(rating)
+        sum=0
+        for i in rating:
+            sum +=i.rate
+        
+        product_rating = sum/star_count
+        product_rating = round(product_rating)
+        return product_rating
 
 
 

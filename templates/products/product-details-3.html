@@ -64,13 +64,13 @@
                     <div class="pro-details-rating-wrap">
                         <div class="pro-details-rating">
                             {% for star in five_stars %}
-                            <a href="{% url 'rating' p.id star %}?next={{ request.path }}">
+                            
                                 <i class="fa fa-star-o 
-                                {% if star <= rating %}
+                                {% if star <= p.get_rating %}
                                     yellow
                                 {% endif %}
                                 "></i>
-                            </a>
+                            
                             {% endfor %}
                         </div>
                         <span><a href="#">{{ reviews.all|length }} Reviews</a></span>
@@ -163,7 +163,7 @@
                 <a class="active" data-toggle="tab" href="#des-details2">Description</a>
                 <a data-toggle="tab" href="#des-details3">Reviews ({{reviews.all|length }})</a>
             </div>
-            <div class="tab-content description-White Lewis">
+            <div class="tab-content description-White Lewis pt-4">
                 <div id="des-details2" class="tab-pane active">
                     <div class="product-description-wrapper">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
@@ -201,11 +201,16 @@
                                                     <h4>{{r.user}}</h4>
                                                 </div>
                                                 <div class="review-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                    {% for star in five_stars %}
+                                                    <a href="{% url 'rating' p.id star %}?next={{ request.path }}">
+                                                        <i class="fa fa-star-o 
+                                                        {% if star <= rating %}
+                                                            yellow
+                                                        {% endif %}
+                                                        "></i>
+                                                    </a>
+                                                    {% endfor %}
+                                                    
                                                 </div>
                                             </div>
                                             <div class="review-left">
@@ -268,13 +273,15 @@
                                         <div class="star-box">
                                             <span>Your rating:</span>
                                             <div class="ratting-star">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
+                                                {% for star in five_stars %}
+                                                <a class="{% if star <= rating %}yellow
+                                                {% endif %}" href="{% url 'rating' p.id star %}?next={{ request.path }}">
+                                                    <i class="fa fa-star-o"></i>
+                                                </a>
+                                                {% endfor %}
                                             </div>
                                         </div>
+
                                         <div class="row">
 
                                             
@@ -495,6 +502,18 @@
         })
     })
 </script> -->
+
+
+
+<style>
+    .ratting-star a{
+        text-decoration:  none;
+    }
+
+    .ratting-star a.yellow {
+        color: #ffa900;
+    }
+</style>
 
 {% endblock %}
 
