@@ -41,14 +41,14 @@ def show_one_product(request,id):
         return render (request,'products/product-details-3.html',{'form':form,'p':p,'reviews':reviews, 'rating': rating, 'five_stars':five_stars})
 
 
-def show_products(request,id):
-    category = Category.objects.get(id = id)
+def show_products(request,category_id):
+    category = Category.objects.get(id = category_id)
     products = category.products_set.all()
     return render(request,'products/shop.html',{'products':products})
 
 
 def rating(request, product_id, rating):
-    
+
     next = request.GET.get('next', '/')
     product = Products.objects.get(id = product_id)
     user = request.user

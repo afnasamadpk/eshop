@@ -20,7 +20,7 @@ from products.views import show_one_product,show_products,rating
 urlpatterns = [
     path('product/<int:id>/',show_one_product,name='show_one_product'),
     # path('review/<int:id>/',review,name = 'review'),
-    path('products/<int:id>/',show_products,name='show_products'),
+    path('products/<int:category_id>/',show_products,name='show_products'),
     path('rating/<int:product_id>/<int:rating>/',rating,name='rating')
     # path('showreviews/<int:id>/',show_reviews,name='show_reviews')
     
