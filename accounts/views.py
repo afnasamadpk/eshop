@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,HttpResponse
 from django.views import View
 from django.views.generic import ListView,DetailView,TemplateView,CreateView
 from accounts.forms import RegistrationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm,PasswordChangeForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 
 
@@ -45,3 +46,19 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return redirect('/login/')
+
+
+def change_password(request):
+
+    if request.method =='POST':
+        form = PasswordChangeForm(data = request.POST,user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(form.user)
+            return redirect('home')
+        else:
+            return render(request,'accounts/my-account.html',{'form':form})
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request,'accounts/my-account.html',{'form':form})

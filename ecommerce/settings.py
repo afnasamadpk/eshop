@@ -63,6 +63,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'products.product_context_processor.category',
+                'products.product_context_processor.products',
                 'cart.cart_context_processor.cart_items',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

@@ -1,4 +1,4 @@
-from products.models import Category
+from products.models import Category,Products
 
 def category(request):
 
@@ -9,6 +9,17 @@ def category(request):
             
 
         'category': category
+
+    }
+def products(request):
+
+    
+    products=Products.objects.all()
+
+    return {
+            
+
+        'products': products
 
     }
 

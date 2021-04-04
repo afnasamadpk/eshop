@@ -38,21 +38,24 @@ def show_one_product(request,id):
         if rate:
             rating = rate.rate
 
-        
-
         form = ReviewModelForm()
-        context = {'form':form,'p':p,'reviews':reviews, 'rating': rating, 'five_stars':five_stars}
+        context = {
+            'form':form,
+            'p':p,
+            'reviews':reviews, 
+            'rating': rating, 
+            'five_stars':five_stars
+            }
         return render (request,'products/product-details-3.html',context)
 
 
-def show_products(request,category_id):
-    category = Category.objects.get(id = category_id)
-    products = category.products_set.all()
-    return render(request,'products/shop.html',{'products':products})
+def show_products(request):
+    # category = Category.objects.get(id = category_id)
+    # products = category.products_set.all()
+    return render(request,'products/shop.html')
 
 
 def rating(request, product_id, rating):
-
     next = request.GET.get('next', '/')
     product = Products.objects.get(id = product_id)
     user = request.user

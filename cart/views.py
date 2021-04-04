@@ -45,6 +45,8 @@ def wish_list(request,id):
     p = Wishlist(user=user,product=product)
     p.save()
     return redirect(next)
+
+
 def view_wishlist(request):
     wish_list = []
     if request.user.is_authenticated:
