@@ -15,12 +15,13 @@ Including another URLconf
 """
 
 from django.urls import path
-from products.views import show_one_product,show_products,rating
+from products.views import show_one_product,show_products,rating,show_categorywise
 
 urlpatterns = [
     path('products/<int:id>/',show_one_product,name='show_one_product'),
     path('products/',show_products,name='show_products'),
-    path('rating/<int:product_id>/<int:rating>/',rating,name='rating')
+    path('rating/<int:product_id>/<int:rating>/',rating,name='rating'),
+    path('showcategorywise/<int:category_id>/',show_categorywise,name='show_categorywise')
     # path('showreviews/<int:id>/',show_reviews,name='show_reviews')
     # path('review/<int:id>/',review,name = 'review'),
     

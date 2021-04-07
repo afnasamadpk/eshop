@@ -46,13 +46,13 @@
                                 <li><a href="{% url 'home' %}">Home</a>
 
                                 </li>
-                                <li><a href="shop.html"> Shop <i class="fa fa-angle-down"></i> </a>
+                                <li><a href="#"> Shop <i class="fa fa-angle-down"></i> </a>
                                     <ul class="mega-menu">
                                         <li>
                                             <ul>
                                                
                                                 {% for item in category %}
-                                                <li><a href="#">{{item.name}}</a></li>
+                                                    <li><a href="{% url 'show_categorywise' item.id %}">{{item.name}}</a></li>
                                                 {% endfor %}
 
                                             </ul>
@@ -60,15 +60,15 @@
 
                                     </ul>
                                 </li>
-                                <li><a href="#">Collection</a></li>
+                                <li><a href="{% url 'show_products' %}">Collection</a></li>
                                 <li><a href="#"> Pages <i class="fa fa-angle-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="about.html">about us</a></li>
                                         <li><a href="{% url 'view_cart' %}">cart page</a></li>
                                         <li><a href="checkout.html">checkout </a></li>
                                         <li><a href="{% url 'view_wishlist' %}">wishlist </a></li>
-                                        <li><a href="my-account.html">my account</a></li>
-                                        <li><a href="login-register.html">login / register </a></li>
+                                        <li><a href="#">my account</a></li>
+                                        <li><a href="{% url 'log_in' %}">login / register </a></li>
                                         <li><a href="contact.html">contact us </a></li>
                                         <li><a href="404.html">404 page </a></li>
                                     </ul>
@@ -94,8 +94,8 @@
                         <div class="same-style header-search">
                             <a class="search-active" href="#"><i class="pe-7s-search"></i></a>
                             <div class="search-content">
-                                <form action="#">
-                                    <input type="text" placeholder="Search" />
+                                <form action="{% url 'show_products' %}">
+                                    <input name="query" type="text" placeholder="Search" />
                                     <button class="button-search"><i class="pe-7s-search"></i></button>
                                 </form>
                             </div> 
@@ -141,8 +141,8 @@
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4><a href="#">{{item.product.name}}</a></h4>
-                                            <h6>Qty: 02</h6>
-                                            <span>${{item.product.price}}</span>
+                                            <h6>Qty: {{ item.quantity }}</h6>
+                                            <span>${{item.sub_total}}</span>
                                         </div>
                                         <div class="shopping-cart-delete">
                                             <a href="{% url 'remove_from_cart' item.id %}?next={{ request.path }}"><i class="fa fa-times-circle"></i></a>

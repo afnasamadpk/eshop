@@ -1,8 +1,7 @@
 from products.models import Category,Products
 
 def category(request):
-
-    
+   
     category=Category.objects.all()
 
     return {
@@ -11,17 +10,8 @@ def category(request):
         'category': category
 
     }
-def products(request):
 
-    
-    products=Products.objects.all()
 
-    return {
-            
-
-        'products': products
-
-    }
 
 
 

@@ -51,8 +51,12 @@ def show_one_product(request,id):
 
 def show_products(request):
     # category = Category.objects.get(id = category_id)
-    # products = category.products_set.all()
-    return render(request,'products/shop.html')
+    query = request.GET.get('query')
+    if query:
+        products = Products.objects.filter(name__contains = query)
+    else:
+        products = Products.objects.all()
+    return render(request,'products/shop.html', {'products': products})
 
 
 def rating(request, product_id, rating):
@@ -70,7 +74,15 @@ def rating(request, product_id, rating):
     # print(count)
     return redirect(next)
     # return redirect(next)
+
+
+def show_categorywise(request,category_id):
     
+    category = Category.objects.get(id = category_id)
+    products = category.products_set.all()
+    return render(request,'products/shop.html',{'products':products})  
+
+
 # def show_rating(request,id):
 #     count = Rating.objects.filter(product=product)
 #     star_count =str(len(count))

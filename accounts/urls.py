@@ -22,7 +22,8 @@ urlpatterns = [
     path('register/',register,name='register'),
     path('login/',log_in,name='log_in'),
     path('logout/',log_out,name='log_out'),
-    path('changepassword/',change_password,name='change_password')
+    path('changepassword/',change_password,name='change_password'),
+    
 
 
     # path('login/',home,name='home'),
