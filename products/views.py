@@ -83,6 +83,14 @@ def show_categorywise(request,category_id):
     return render(request,'products/shop.html',{'products':products})  
 
 
+
+
+
+
+
+
+
+
 # def show_rating(request,id):
 #     count = Rating.objects.filter(product=product)
 #     star_count =str(len(count))

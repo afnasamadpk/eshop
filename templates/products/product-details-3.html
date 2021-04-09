@@ -27,12 +27,7 @@
                         <div class="zoompro-border zoompro-span">
                             <img class="zoompro" src="{{ p.image.url }}" data-zoom-image="assets/img/product-details/product-detalis-bl1.jpg" alt=""/>          
                             <span>-29%</span>
-                            <div class="product-video">
-                                <a class="video-popup" href="https://www.youtube.com/watch?v=tce_Ap96b0c">
-                                    <i class="fa fa-video-camera"></i>
-                                    View Video
-                                </a>
-                            </div>
+                            
                         </div>
                     </div>
                     <div id="gallery" class="product-dec-slider-2">
@@ -76,13 +71,13 @@
                         <span><a href="#">{{ reviews.all|length }} Reviews</a></span>
                     </div>
                     <p>{{ p.description }}</p>
-                    <div class="pro-details-list">
+                    <!-- <div class="pro-details-list">
                         <ul>
                             <li>- 0.5 mm Dail</li>
                             <li>- Inspired vector icons</li>
                             <li>- Very modern style  </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="pro-details-size-color">
                         <div class="pro-details-color-wrap">
                             <span>Color</span>
@@ -110,18 +105,14 @@
                         </div>
                     </div>
                     <div class="pro-details-quality">
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="2">
-                        </div>
+                        
                         <div class="pro-details-cart btn-hover">
                             <a href="{% url 'add_to_cart' p.id %}?next={{ request.path }}">Add to Cart</a>
                         </div>
                         <div class="pro-details-wishlist">
                             <a href="{% url 'wish_list' p.id %}?next={{ request.path }}"><i class="fa fa-heart-o"></i></a>
                         </div>
-                        <div class="pro-details-compare">
-                            <a href="#"><i class="pe-7s-shuffle"></i></a>
-                        </div>
+                        
                     </div>
                     <div class="pro-details-meta">
                         <span>Categories :</span>

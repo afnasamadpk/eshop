@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,HttpResponse
-from cart.models import Cart,Wishlist
+from cart.models import Cart,Wishlist,Checkout
 from products.models import Products
 from accounts.models import UserAccounts
 from django.contrib.auth.decorators import login_required
@@ -20,8 +20,9 @@ def add_to_cart(request,id):
     # c = Cart.objects.filter(user=user)
     # return HttpResponse(str(len(c)))
 
-
-def view_cart(request):  
+@login_required(login_url="/login/")
+def view_cart(request):
+    
     return render(request,'cart/cart-page.html')
 
 
@@ -52,24 +53,36 @@ def cart_add(request,id):
     product=Cart.objects.get(id=id)
     product.quantity = product.quantity + 1
     product.save()
-    print(product.quantity)
+    # print(product.quantity)
     return redirect('/cart/')
 
 
 def cart_sub(request,id):
     product=Cart.objects.get(id=id)
-    product.quantity = product.quantity - 1
-    product.save()
+    
+    if product.quantity != 1:
+
+        product.quantity = product.quantity - 1
+        product.save()
     print(product.quantity)
     return redirect('/cart/')
 
+def checkout(request):
+    user = request.user
+    cart = Cart.objects.filter(user = user,is_bought=False)
+    bill_id = Checkout.objects.all().latest('bill_id').bill_id
+    bill_id = bill_id + 1
+    for c in cart:   
+        checkout = Checkout(user=user,cart=c, price=c.product.price,bill_id=bill_id)
+        checkout.save()
+        c.product.quantity = c.product.quantity - c.quantity 
+        c.product.save()
+        c.is_bought = True
+        c.save()
 
-# def sub_total(request,id):
-#     item=Cart.objects.get(id=id)
-#     sub_total = item.product.price * item.quantity
-#     # print(item.product.price)
-#     # print(item.quantity)
-#     print(sub_total)
+    return redirect('home')
+
+
 
 
 

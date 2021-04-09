@@ -40,7 +40,7 @@ class UserManager(BaseUserManager):
 class UserAccounts(AbstractUser):
     id = models.BigAutoField(primary_key = True)
     username = None
-    shortname=models.CharField(max_length=12, null=False)
+    shortname=models.CharField('name', max_length=12, null=False)
     email = models.EmailField(_('email address'), unique=True)
     phone = models.CharField(max_length=12, null=False)
     GENDER_CHOICES = (
@@ -64,3 +64,14 @@ class ProfilePicture(models.Model):
     user = models.OneToOneField(UserAccounts, on_delete = models.CASCADE)
     image = models.ImageField(upload_to='profile', default='avatar.jpg')
 
+
+class Address(models.Model):
+    id = models.BigAutoField(primary_key = True)
+    user = models.ForeignKey(UserAccounts, on_delete = models.CASCADE)
+    address = models.TextField()
+    country = models.CharField(max_length = 60)
+    state = models.CharField(max_length = 60)
+    city = models.CharField(max_length = 60)
+    phone = models.IntegerField()
+    pincode = models.IntegerField()
+    

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from accounts.models import UserAccounts
+
 # Create your models here.
 
 class Category(models.Model):
@@ -21,7 +22,8 @@ class Products(models.Model):
     added_date=models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE)
-
+    quantity=models.PositiveIntegerField(default=0)
+    
 
     def __str__(self):
         return self.name
@@ -52,6 +54,12 @@ class Review(models.Model):
         return self.subject
 
 class Rating(models.Model):
+    id = models.BigAutoField(primary_key = True)
     user = models.ForeignKey(UserAccounts,on_delete=models.CASCADE,related_name='rating')
     product = models.ForeignKey(Products,on_delete=models.CASCADE)
     rate = models.IntegerField(default = 1)
+
+
+
+
+

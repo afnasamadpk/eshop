@@ -366,12 +366,12 @@
                         <h4 class="pro-sidebar-title">Tag </h4>
                         <div class="sidebar-widget-tag mt-25">
                             <ul>
-                                <li><a href="#">Clothing</a></li>
-                                <li><a href="#">Accessories</a></li>
-                                <li><a href="#">For Men</a></li>
-                                <li><a href="#">Women</a></li>
-                                <li><a href="#">Fashion</a></li>
+                                {% for item in category %}
+                                <li><a href="{% url 'show_categorywise' item.id %}">{{item.name}}</a></li>
+                                {% endfor %}
+
                             </ul>
+
                         </div>
                     </div>
                 </div>

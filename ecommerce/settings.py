@@ -65,6 +65,8 @@ TEMPLATES = [
                 'products.product_context_processor.category',
                 
                 'cart.cart_context_processor.cart_items',
+                'cart.cart_context_processor.cart_count',
+
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
